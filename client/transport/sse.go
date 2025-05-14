@@ -263,6 +263,10 @@ func (c *SSE) SendRequest(
 
 	// Set headers
 	req.Header.Set("Content-Type", "application/json")
+	reqId, ok := ctx.Value("Terminus-Request-Id").(string)
+	if ok {
+		req.Header.Set("Terminus-Request-Id", reqId)
+	}
 	for k, v := range c.headers {
 		req.Header.Set(k, v)
 	}
